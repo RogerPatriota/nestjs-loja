@@ -22,7 +22,6 @@ export class UserController {
                 user.name
             )
         )
-        console.log(Allusers)
         
         return { data: users }
     }
