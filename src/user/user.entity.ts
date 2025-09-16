@@ -28,7 +28,7 @@ export class UserEntity {
     @UpdateDateColumn({ name: 'updated_at'})
     update_ate: Date
 
-    @DeleteDateColumn({ name: 'deleted_ate'})
+    @DeleteDateColumn({ name: 'deleted_at'})
     deletedAt: Date
     
 }

@@ -5,16 +5,19 @@ import { UserEntity } from "./user.entity";
 import { v4 as uuid } from 'uuid'
 import { UserReadDTO } from "./DTO/user.read.dto";
 import { UserUpdateDTO } from "./DTO/user.update.dto";
+import { UserService } from "./user.service";
 
 @Controller('user')
 export class UserController {
 
-    constructor(private userRepository: UserRepository) {
-    }
+    constructor(
+        private userRepository: UserRepository,
+        private userService: UserService
+    ) {}
 
     @Get()
     async getUsers() {
-        const Allusers = await this.userRepository.showUser()
+        const Allusers = await this.userService.showUsers()
 
         const users = Allusers.map(
             user => new UserReadDTO(
