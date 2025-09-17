@@ -1,4 +1,5 @@
-import { Column, CreateDateColumn, DeleteDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm"
+import { Column, CreateDateColumn, DeleteDateColumn, Entity, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm"
+import { ProductDetailsEntity } from "./product-details-entity"
 
 @Entity({ name: 'product'})
 export class ProductEntity {
@@ -20,11 +21,15 @@ export class ProductEntity {
     @Column({name: 'category', length: 100})
     category: string
 
+    @OneToMany(() => ProductDetailsEntity, productDetailsEntity =>
+    productDetailsEntity.product)
+    details: ProductDetailsEntity[]
+
     @CreateDateColumn({ name: 'created_at'})
     createdAt: Date
 
     @UpdateDateColumn({ name: 'updated_at'})
-    update_ate: Date
+    updateAt: Date
 
     @DeleteDateColumn({ name: 'deleted_ate'})
     deletedAt: Date

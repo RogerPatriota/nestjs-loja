@@ -1,6 +1,17 @@
-import { IsNotEmpty, IsNumber, IsPositive, IsString, MaxLength, Min } from "class-validator";
+import { IsArray, IsNotEmpty, IsNumber, IsPositive, IsString, MaxLength, Min } from "class-validator";
 import { IsNameUnique } from "../validation/name-validation";
+import { ProductEntity } from "../product-entity";
+import { Type } from "class-transformer";
 
+export class ProductDetailsCreate {
+    id: string
+    
+    name: string
+
+    description: string
+
+    product: ProductEntity
+}
 export class ProductCreateDTO {
 
     @IsNotEmpty()
@@ -23,4 +34,8 @@ export class ProductCreateDTO {
     @IsPositive()
     @Min(1)
     amountAvailable: number
+
+    @IsArray()
+    @Type(() => ProductDetailsCreate)
+    details: ProductDetailsCreate[]
 }

@@ -42,6 +42,7 @@ export class ProductController {
         productEntity.description = productData.description
         productEntity.category = productData.category
         productEntity.amountAvailable = productData.amountAvailable
+        productEntity.details = productData.details
 
         const newProduct = await this.productService.createProduct(productEntity)
 
