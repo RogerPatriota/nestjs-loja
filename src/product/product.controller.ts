@@ -5,11 +5,15 @@ import { ProductEntity } from "./product-entity";
 import { v4 as uuid } from 'uuid';
 import { ProductReadDto } from "./DTO/product.read.dto";
 import { ProductUpdateDTO } from "./DTO/product.update";
+import { ProductService } from "./product-service";
 
 @Controller('/product')
 export class ProductController {
 
-    constructor(private productRepository: ProductRepository) {}
+    constructor(
+        private productRepository: ProductRepository,
+        private productService: ProductService
+    ) {}
 
     @Get()
     async getProduct()  {
@@ -36,9 +40,10 @@ export class ProductController {
         productEntity.name = productData.name
         productEntity.price = productData.price
         productEntity.description = productData.description
+        productEntity.category = productData.category
         productEntity.amountAvailable = productData.amountAvailable
 
-        const newProduct = await this.productRepository.createProduct(productEntity)
+        const newProduct = await this.productService.createProduct(productEntity)
 
         if (newProduct) {
             return { message: 'product created', data: new ProductReadDto(

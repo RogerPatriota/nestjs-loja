@@ -11,6 +11,10 @@ export class ProductCreateDTO {
     @MaxLength(80)
     description: string;
 
+    @IsString()
+    @MaxLength(100)
+    category: string
+
     @IsNumber()
     @IsPositive()
     price: number;

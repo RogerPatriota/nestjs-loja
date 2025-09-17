@@ -37,7 +37,7 @@ export class UserController {
         userEntity.password = userData.password
         userEntity.id = uuid()
 
-        const newUser = await this.userRepository.saveUser(userEntity)
+        const newUser = await this.userService.createUser(userEntity)
 
         if (newUser) {
             return { message: 'user create', data: new UserReadDTO(
@@ -51,7 +51,7 @@ export class UserController {
 
     @Put('/:id')
     async updateUser(@Body() userData: UserUpdateDTO, @Param() params: any) {
-        const newUser = await this.userRepository.updateUser(params.id, userData)
+        const newUser = await this.userService.updateUser(params.id, userData)
         
         if (newUser) {
             return { message: 'user updated', data: newUser}
